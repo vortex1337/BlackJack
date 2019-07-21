@@ -33,13 +33,13 @@ def game_on (player, dealer, deck, bet):
                 blackjack_functions.push()
                 break
     if balance.total <= 0:
-        return False
+        return 'repeat?'
     repl = blackjack_functions.replay(balance)
     if repl == 'y':
         return True
     else:
         return False
-def start(balance):
+def start():
     while True:
         blackjack_functions.clear()
         print 'Your balance is {}$'.format(balance.total)
@@ -65,24 +65,24 @@ def start(balance):
         player.add_card(deck.deal())
         blackjack_functions.show_some(player, dealer)
         game = game_on(player, dealer, deck, bet)
-        if game:
+        if game == False:
             return True
-        else:
-            return False
+        if game == 'repeat?':
+            return 'repeat'
+
+
 def mother():
     while True:
         global balance
         balance = Chip.Chip()
-        beginning = start(balance)
+        beginning = start()
+        if beginning == 'repeat':
+            new = blackjack_functions.new_game()
+            if new == 'y':
+                continue
+            else:
+                break
         if beginning:
-            continue
-        else:
-            break
-        print 'You are out of money'
-        new = blackjack_functions.new_game()
-        if new == 'y':
-            continue
-        else:
             break
 if __name__ == '__main__':
     mother()

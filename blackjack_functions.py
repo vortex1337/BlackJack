@@ -91,7 +91,7 @@ def replay(balance):
 def new_game():
     while True:
         try:
-            ask = raw_input('Play a new game? y/n ')
+            ask = raw_input('You are out of money!\nPlay a new game? y/n ')
             if ask != 'y':
                 if ask != 'n':
                     raise TypeError
